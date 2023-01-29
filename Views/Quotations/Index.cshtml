@@ -88,14 +88,14 @@
                                         @{
                                             if (item.CancelStatus == true)
                                             {
-                                                <button type="button" class="btn btn-danger btn-sm disabled" data-bs-toggle="modal"
+                                                <button type="button" class="btn btn-danger btn-sm disabled cancelButton" data-bs-toggle="modal"
                                             data-bs-target="#cancelModal" id="cancelButton" data-id="@item.Id" data-val="Are you sure want to cancel Q @item.Id.ToString("0000000000")? The canceled quotation will unable to edit in the future.">
                                                     <i class="bi bi-clipboard-x-fill"></i> Cancel
                                                 </button>
                                             }
                                             else
                                             {
-                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                <button type="button" class="btn btn-danger btn-sm cancelButton" data-bs-toggle="modal"
                                             data-bs-target="#cancelModal" id="cancelButton" data-id="@item.Id"
                                             data-val="Are you sure want to cancel Q @item.Id.ToString("0000000000")? The canceled quotation will unable to edit in the future.">
                                                     <i class="bi bi-clipboard-x-fill"></i> Cancel
@@ -153,12 +153,12 @@
 
 <script>
     $(document).ready(function () {
-        $('#cancelButton').on('click', function (event) {
-            var message = $('#cancelButton').data('val');
-            $("#modal-body").text(message);
+        $('.cancelButton').on('click', function (event) {
+                var message = $(this).data('val');
+                $("#modal-body").text(message);
 
-            var id = $('#cancelButton').data('id');
-            $("#hiddenId").val(id);
+                var id = $(this).data('id');
+                $("#hiddenId").val(id);
 
             $('#confirmCancel').attr('formaction', '/quotations/Cancel/' + id);
         });
