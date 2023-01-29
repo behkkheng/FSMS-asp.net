@@ -82,7 +82,7 @@
                                     </div>
 
                                     <!-- Delete Button -->
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" id="deleteButton"
+                                    <button type="button" class="btn btn-danger btn-sm deleteButton" data-bs-toggle="modal" id="deleteButton"
                                     data-bs-target="#deleteModal"
                                     data-val="Are you sure want to delete @(item.Name)?"
                                     data-id="@item.Id">
@@ -140,11 +140,12 @@
 </div>
 
 <script>
-    $('#deleteButton').on('click', function (event) {
-        var message = $('#deleteButton').data('val');
-        $(".modal-body").text(message);
+    $('.deleteButton').on('click', function (event) {
+        var message = $(this).data('val');
+        console.log(message);
+        $("#modal-body").text(message);
 
-        var id = $('#deleteButton').data('id');
+        var id = $(this).data('id');
         $("#hiddenId").val(id);
 
         $('#confirmDelete').attr('formaction', '/Customers/Delete/' + id);
