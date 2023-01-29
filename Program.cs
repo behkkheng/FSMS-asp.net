@@ -31,7 +31,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     options.SignIn.RequireConfirmedEmail = false;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    options.Lockout.MaxFailedAccessAttempts = 10;
+    options.Lockout.MaxFailedAccessAttempts = 1000;
 });
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
