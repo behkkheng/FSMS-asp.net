@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FSMS_asp.net.Models
 {
-    [Keyless]
     public class AccountViewModel
     {
         //Edit personal information

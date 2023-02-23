@@ -103,14 +103,14 @@
                                     <div class="pe-1">
                                         @if (@item.Role == "Manager")
                                         {
-                                            <button type="button" class="btn btn-warning btn-sm" data-val="Are you sure want to promote @(item.Name) to Manager?"
+                                            <button type="button" class="btn btn-warning btn-sm promoteButton" data-val="Are you sure want to promote @(item.Name) to Manager?"
                                         data-id="@item.Id" id="promoteButton" data-bs-toggle="modal" data-bs-target="#roleModal" disabled>
                                                 <i class="bi bi-wrench-adjustable"></i> Roles
                                             </button>
                                         }
                                         else
                                         {
-                                            <button type="button" class="btn btn-warning btn-sm" data-val="Are you sure want to promote @(item.Name) to Manager?"
+                                            <button type="button" class="btn btn-warning btn-sm promoteButton" data-val="Are you sure want to promote @(item.Name) to Manager?"
                                         data-id="@item.Id" id="promoteButton" data-bs-toggle="modal" data-bs-target="#roleModal">
                                                 <i class="bi bi-wrench-adjustable"></i> Roles
                                             </button>
@@ -188,7 +188,7 @@
 
                 <!-- Promote Button -->
                 <form asp-action="PromoteToAdmin" method="post">
-                    <input type="hidden" id="hiddenId">
+                    <input type="hidden" id="promoteId" name="promoteId">
                     <button type="submit" class="btn btn-warning" data-bs-dismiss="modal" id="confirmPromote">Promote</button>
                 </form>
 
@@ -203,21 +203,21 @@
         $('.deleteButton').on('click', function (event) {
             var message = $(this).data('val');
             $("#modal-body").text(message);
+            console.log(message);
 
             var id = $(this).data('id');
             $("#hiddenId").val(id);
 
-            $('#confirmDelete').attr('formaction', '/Products/Delete/' + id);
+            $('#confirmDelete').attr('formaction', '/Users/Delete/' + id);
         });
 
-        $('#promoteButton').on('click', function (event) {
-            console.log("hello");
+        $('.promoteButton').on('click', function (event) {
             var message = $('#promoteButton').data('val');
-            console.log(message);
             $(".modal-body").text(message);
 
-            var id = $('#promoteButton').data('id');
-            $("#hiddenId").val(id);
+            var id = $(this).data('id');
+            $("#promoteId").val(id);
+            console.log($("#promoteId").val());
 
             $('#confirmPromote').attr('formaction', '/Users/PromoteToAdmin/' + id);
         });

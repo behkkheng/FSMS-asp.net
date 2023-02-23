@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FSMS_asp.net.Data.Migrations
+namespace FSMS_asp.net.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220928154346_fixSomething")]
-    partial class fixSomething
+    [Migration("20230130135619_fix_seeding_aspnetroles")]
+    partial class fix_seeding_aspnetroles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,37 +23,6 @@ namespace FSMS_asp.net.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("FSMS_asp.net.Models.AccountViewModel", b =>
-                {
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CurrentPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NewPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("AccountViewModel");
-                });
 
             modelBuilder.Entity("FSMS_asp.net.Models.ApplicationUser", b =>
                 {
@@ -129,6 +98,46 @@ namespace FSMS_asp.net.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "40352054-6ef4-4be4-8c4f-b3a216bba268",
+                            AccessFailedCount = 0,
+                            Address = "343, Taman Bistari Jaya, 19800, Perak",
+                            ConcurrencyStamp = "f055c0fe-6bb1-4295-b86c-ec05780c2f47",
+                            Email = "staff@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Staff",
+                            NormalizedEmail = "STAFF@GMAIL.COM",
+                            NormalizedUserName = "STAFF@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFp/etVZfqxWMu9uLBz/b90d5VIUMltyD0nT6UsVbmY++Pr9AJEgjKMNH915WVf3Tw==",
+                            PhoneNumber = "0176740394",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a5accac9-9b1a-453c-b9e0-0793a418f46d",
+                            TwoFactorEnabled = false,
+                            UserName = "staff@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "45eeeec2-99b2-4115-9d96-481c08bcf984",
+                            AccessFailedCount = 0,
+                            Address = "22A, Taman Bagan, 36700, Penang",
+                            ConcurrencyStamp = "33d137c6-40c0-45c4-9f8e-fc94d573f3d5",
+                            Email = "manager@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Manager",
+                            NormalizedEmail = "MANAGER@GMAIL.COM",
+                            NormalizedUserName = "MANAGER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFJJ2xeu5YfVJqPo0ZwTjgXDH3BakYNaSJFBrHSUhql+9BuKEiAlnLqeKa2Gel+r0Q==",
+                            PhoneNumber = "0192045656",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "227ec267-6ac4-453b-9eff-4b653aaaacd6",
+                            TwoFactorEnabled = false,
+                            UserName = "manager@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("FSMS_asp.net.Models.CustomersModel", b =>
@@ -157,7 +166,27 @@ namespace FSMS_asp.net.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomersModel");
+                    b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "6-3C, Jalan Menglembu, 5680, Ipoh, Perak",
+                            Email = "astarte@gmail.com",
+                            HpNo = "6072363232",
+                            Name = "Astarte Myrto",
+                            UpdatedDateTime = new DateTime(2023, 1, 30, 21, 56, 18, 502, DateTimeKind.Local).AddTicks(1398)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "B2-2-4, Jalan Ong Yi How, Taman Jaya, 23400, Perak",
+                            Email = "cecil@gmail.com",
+                            HpNo = "0392813077",
+                            Name = "Cecil Bors",
+                            UpdatedDateTime = new DateTime(2023, 1, 30, 21, 56, 18, 502, DateTimeKind.Local).AddTicks(1412)
+                        });
                 });
 
             modelBuilder.Entity("FSMS_asp.net.Models.Delivery_Order.DOrderDetailsModel", b =>
@@ -188,7 +217,7 @@ namespace FSMS_asp.net.Data.Migrations
 
                     b.HasIndex("DOrdersId");
 
-                    b.ToTable("DOrderDetails");
+                    b.ToTable("DOrder Details");
                 });
 
             modelBuilder.Entity("FSMS_asp.net.Models.Delivery_Order.DOrdersModel", b =>
@@ -225,6 +254,9 @@ namespace FSMS_asp.net.Data.Migrations
 
                     b.Property<string>("RefNo")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TotalQuantity")
                         .HasColumnType("int");
@@ -265,7 +297,7 @@ namespace FSMS_asp.net.Data.Migrations
 
                     b.HasIndex("InvoiceId");
 
-                    b.ToTable("InvoiceDetailsModel");
+                    b.ToTable("Invoice Details");
                 });
 
             modelBuilder.Entity("FSMS_asp.net.Models.InvoicesModel", b =>
@@ -308,7 +340,7 @@ namespace FSMS_asp.net.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InvoicesModel");
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("FSMS_asp.net.Models.ProductsModel", b =>
@@ -338,9 +370,47 @@ namespace FSMS_asp.net.Data.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ProductsModel");
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A red sofa.",
+                            Image = "/images/Products Image/39d427a1-6d30-4fc5-b475-4e2c2cfd8854_sofa.jpg",
+                            Name = "Sofa",
+                            Price = 123.89m,
+                            Quantity = 60,
+                            UpdatedAt = new DateTime(2023, 1, 30, 21, 56, 18, 502, DateTimeKind.Local).AddTicks(1582),
+                            UpdatedBy = "staff@gmail.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "A plastic white table.",
+                            Image = "/images/Products Image/e3ead3a0-e85f-4346-8fab-6d801ecf60f0_foldable-rectangular-table-n-metal-leg.jpg",
+                            Name = "Writing Table",
+                            Price = 200.50m,
+                            Quantity = 140,
+                            UpdatedAt = new DateTime(2023, 1, 30, 21, 56, 18, 502, DateTimeKind.Local).AddTicks(1586),
+                            UpdatedBy = "staff@gmail.com"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A plastic white table.",
+                            Image = "/images/Products Image/e174a37f-304f-491d-9f7a-73bfdf5244de_plasticchair.jpg",
+                            Name = "Writing Table",
+                            Price = 50.20m,
+                            Quantity = 4,
+                            UpdatedAt = new DateTime(2023, 1, 30, 21, 56, 18, 502, DateTimeKind.Local).AddTicks(1588),
+                            UpdatedBy = "staff@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("FSMS_asp.net.Models.Quotation.QuotationDetailsModel", b =>
@@ -371,7 +441,7 @@ namespace FSMS_asp.net.Data.Migrations
 
                     b.HasIndex("QuotationId");
 
-                    b.ToTable("QuotationDetails");
+                    b.ToTable("Quotation Details");
                 });
 
             modelBuilder.Entity("FSMS_asp.net.Models.Quotation.QuotationsModel", b =>
@@ -436,6 +506,22 @@ namespace FSMS_asp.net.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9b88addd-d4bf-4ea5-b777-70753617f2e9",
+                            ConcurrencyStamp = "a415be2c-4241-4ec4-9a56-11212bf1edf1",
+                            Name = "Staff",
+                            NormalizedName = "STAFF"
+                        },
+                        new
+                        {
+                            Id = "35ad3cc4-b118-416b-881c-37ff6de075bf",
+                            ConcurrencyStamp = "786ca1ca-0e96-4b85-b438-d300b5488e99",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -523,6 +609,18 @@ namespace FSMS_asp.net.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "40352054-6ef4-4be4-8c4f-b3a216bba268",
+                            RoleId = "9b88addd-d4bf-4ea5-b777-70753617f2e9"
+                        },
+                        new
+                        {
+                            UserId = "45eeeec2-99b2-4115-9d96-481c08bcf984",
+                            RoleId = "35ad3cc4-b118-416b-881c-37ff6de075bf"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

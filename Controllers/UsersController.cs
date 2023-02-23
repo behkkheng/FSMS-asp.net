@@ -187,13 +187,15 @@ namespace FSMS_asp.net.Controllers
                 await _userManager.DeleteAsync(user);
             }
             //return to user index
-            return RedirectToAction(nameof(Index));
+            return Redirect("/users/index");
         }
 
-        public async Task<IActionResult> PromoteToAdmin(string id)
+        [HttpPost, ActionName("PromoteToAdmin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PromoteToAdmin(string promoteId)
         {
             //get the user from database
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(promoteId);
             //remove the staff role from user
             await _userManager.RemoveFromRoleAsync(user, "Staff");
             //set admin to user
